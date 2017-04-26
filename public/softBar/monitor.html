@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>7x24呼叫中心</title>
+        <script type="text/javascript" src="./javascripts/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="./javascripts/jquery.json.min.js"></script>
+        <script type="text/javascript" src="./javascripts/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript" src="./javascripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./javascripts/global.js"></script>
+        <script type="text/javascript" src="./javascripts/app.js"></script>
+        <script type="text/javascript" src="./javascripts/softphonebar.js"></script>
+        <script type="text/javascript" src="./javascripts/phone.js"></script>
+        <script type="text/javascript" src="./javascripts/utils.js"></script>
+        <script type="text/javascript" src="./javascripts/cnToSpell.js"></script>
+        <link rel="stylesheet" type="text/css" href="./stylesheets/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./stylesheets/phone.css">
+        <link rel="stylesheet" type="text/css" href="./stylesheets/app.css">
+    </head>
+    <body>
+    <div class="base_style" id="monitor_allpbx" style="display: none;">
+        <div class="right_container">
+            <div class="container-fluid">
+                <div class="monitor_list_serviceNo">
+                    <h5>服务号监控列表</h5>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <table id="monitor_serviceNo" class="table table-hover table-condensed table-bordered" >
+                                <thead>
+                                <tr class="hearTd">
+                                    <th>服务号码</th>
+                                    <th>今日外部来电数</th>
+                                    <th>今日未接外部来电数</th>
+                                    <th>今日已接外部来电数</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="monitor_list_queue">
+                    <h5>技能组监控列表   (总排队数:<span id="monitor_waitCountTotal" class="num">0</span>)</h5>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <table id="monitor_queue" class="table table-hover table-condensed table-bordered" style="table-layout:fixed;">
+                                <thead>
+                                <tr class="hearTd">
+                                    <th style="width: 320px;">技能组名称</th>
+                                    <th>空闲座席数</th>
+                                    <th style="width: 220px;">签入座席数</th>
+                                    <th>排队数</th>
+                                    <th>今日接通电话数</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="fl" style="font-size: 15px;font-weight: bold">
+                    座席监控列表
+                </div>
+                <div class="fl monitor_department" style="height:24px;font-size: 15px;font-weight: bold;padding-left: 10px;margin-top: -7px;display: none">
+                    请选择部门:<select id="monitor_department_options___pbxid" style="width: 100px;" onchange="holly.softphonebar._softphonebar_deptChange('__pbxid');"></select>
+                </div>
+                <div class="fl" style="font-size: 15px;font-weight: bold;padding-left: 8px;">
+                    (座席总量:<span id="monitor_countAll" class="num">0</span>  在线座席:<span id="monitor_onlineCount" class="num">0</span>  空闲座席:<span id="monitor_idleCount" class="num">0</span>)
+                </div>
+                <div class="clear1">&nbsp;</div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <table id="monitor_peer" class="table table-hover table-condensed table-bordered" style="table-layout:fixed;">
+                            <thead>
+                            <tr class="hearTd">
+                                <th style="width:80px;height: 20px; overflow: hidden;cursor: pointer" onclick="holly.utils.sortTable('monitor_peer', 0, 'string', this);" state="init">
+                                    座席姓名 <span class="sort monitor_sort">&nbsp;</span>
+                                </th>
+                                <th style="width:40px;cursor: pointer" onclick="holly.utils.sortTable('monitor_peer', 1, 'int', this);" state="init">
+                                    工号 <span class="sort monitor_sort">&nbsp;</span>
+                                </th>
+                                <th style="width:65px;cursor: pointer" onclick="holly.utils.sortTable('monitor_peer', 2, 'intAndString', this);" state="init">
+                                    已接听数 <span class="sort monitor_sort">&nbsp;</span>
+                                </th>
+                                <th style="width:80px;cursor: pointer" onclick="holly.utils.sortTable('monitor_peer', 3, 'int', this);" state="init">
+                                    外呼成功数 <span class="sort monitor_sort">&nbsp;</span>
+                                </th>
+                                <th style="width:80px;">客户号码</th>
+                                <th style="width:80px;">接听方式</th>
+                                <th style="width:60px;cursor: pointer" onclick="holly.utils.sortTable('monitor_peer', 6, 'string', this);" state="init">
+                                    状态 <span class="sort monitor_sort">&nbsp;</span>
+                                </th>
+                                <th style="width:85px;">技能组</th>
+                                <th style="width:56px;">状态时长</th>
+                                <th style="width:65px;cursor: pointer" onclick="holly.utils.sortTable('monitor_peer', 9, 'string', this);" state="init">
+                                    外呼时长 <span class="sort monitor_sort">&nbsp;</span>
+                                </th>
+                                <th style="width:55px;">网络延迟</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="clear10" style="height:60px">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div id ="softphone-bar-bgdiv" class="softphone-transfer-bg-div"></div>
+<div id="softphone_consult" class="softphone-transfer-div"></div>
+<div id="softphone_transfer" class="softphone-transfer-div"></div>
+<div id="icc_event" style="display:none;"></div>
+    </body>
+</html>
+<script type="text/javascript">
+    holly.app.loginMonitor();
+</script>

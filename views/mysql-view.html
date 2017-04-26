@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+Welcome to <%= title %>
+<table border="1">
+    <tr>
+        <td>id</td>
+        <td>mobile</td>
+        <td>uuid</td>
+        <td>pid</td>
+    </tr>
+    <% data.forEach(function(item){ %>
+    <tr>
+        <td><%= item.id %></td>
+        <td><%= item.mobile %></td>
+        <td><%= item.uuid %></td>
+        <td><%= item.pid %></td>
+    </tr>
+    <% }) %>
+</table>
+</body>
+</html>
